@@ -40,17 +40,17 @@
   }
 
   Paddle.prototype.render = function() {
-    context.fillStyle = "#0000FF";
+    context.fillStyle = "red";
     context.fillRect(this.left, this.right, this.width, this.height);
   };
 // --------------------------------------------------Actual Paddle
 // ----------Creation
   function Player() {
-    this.paddle = new Paddle(0,0,8,50)
+    this.paddle = new Paddle(width-100,height-300,8,50)
   }
 
   function Computer() {
-    this.paddle = new Paddle(0,0,8,50)
+    this.paddle = new Paddle(100,200,8,50)
   }
 // ----------Rendered
   Player.prototype.render = function() {
@@ -61,6 +61,29 @@
     this.paddle.render();
   }
 // --------------------------------------------------Ball setup
-  context.arc(400, 250, 10, 0, 2*Math.PI, false);
-  var circlex = document.createElement('circlex');
-  var circley = document.createElement('circley');
+ function Ball(x, y) {
+ this.x = x;
+ this.y = y;
+ this.x_speed = 0;
+ this.y_speed = 3;
+ this.radius = 5;
+}
+
+ Ball.prototype.render = function() {
+ context.beginPath();
+ context.arc(this.x, this.y, this.radius, 2 * Math.PI, false);
+ context.fillStyle = "#000000";
+ context.fill();
+};
+// --------------------------------------------------Update Render
+ var player = new Player();
+ var computer = new Computer();
+ var ball = new Ball(200, 300)
+
+ var render = function() {
+   context.fillStyle = "gray";
+   context.fillRect(0, 0, width, height);
+   player.render();
+   computer.render();
+   ball.render();
+ };
