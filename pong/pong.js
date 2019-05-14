@@ -87,3 +87,25 @@
    computer.render();
    ball.render();
  };
+// --------------------------------------------------Animating
+ var update = function() {
+   ball.update(player.paddle, computer.paddle);
+};
+
+ Ball.prototype.update = function(paddle1, paddle2) {
+  this.x += this.x_speed;
+  this.y += this.y_speed;
+  var right_x = this.x - 5;
+  var right_y = this.y - 5;
+  var left_x = this.x + 5;
+  var left_y = this.y + 5;
+};
+// ----------when hitting top wall
+ if (this.x - 5 < 0) {
+   this.x = 5;
+   this.X_speed = -this.X_speed;
+// ----------when hitting bottom wall
+ } else if (this.X + 5 > 400) {
+   this.x = 395;
+   this.x_speed = -this.x_speed;
+ }
