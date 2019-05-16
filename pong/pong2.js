@@ -2,7 +2,7 @@
 Author: Alex Dawson
 Description: Pong game
 -------------------------------------------------
-For Carrier: PlayerPaddle = LeftPaddley, ComputerPaddle = RightPaddley, BallY = Circley,
+For Carrier: PlayerPaddleY = LeftPaddley, ComputerPaddleY = RightPaddley, BallY = Circley,
 BallX = Circlex, PlayerPaddle_step = LeftPaddleStep, ComputerPaddle_step = RightPaddleStep,
  BallX_step = XBallStep, BallY_step = YBallStep, DownKey = keysDown.
 -------------------------------------------------- */
@@ -19,8 +19,10 @@ BallX = Circlex, PlayerPaddle_step = LeftPaddleStep, ComputerPaddle_step = Right
  };
 // --------------------------------------------------Global Variable Initializations
 // ----------Sprites
-var PlayerPaddle = 225;
-var ComputerPaddle = 225;
+var PlayerPaddleY = 225;
+var PlayerPaddleX = 0;
+var ComputerPaddleY = 225;
+var ComputerPaddleX = 792;
 var BallX = 400;
 var BallY = 250;
 // ----------Sprite Movement
@@ -31,6 +33,9 @@ var BallY_step = -5;
 var DownKey = {};
 window.addEventListener("keydown", function(event) {DownKey[event.keyCode] = true;});
 window.addEventListener("keyup", function(event) {delete DownKey[event.keyCode];});
+// ----------Widths and Heights
+var PaddleWidth = 8;
+var PaddleHeight = 50;
 // ----------Game Functions
 var keepPlaying = true;
 function EraseCanvas() {
@@ -43,8 +48,8 @@ function EraseCanvas() {
 function DrawGame() {
   context.beginPath();
   context.fillStyle = "black";
-  context.fillRect(0,PlayerPaddle, 8, 50);
-  context.fillRect(792,ComputerPaddle, 8, 50);
+  context.fillRect(PlayerPaddleX,PlayerPaddleY, PaddleWidth, PaddleHeight);
+  context.fillRect(ComputerPaddleX,ComputerPaddleY, PaddleWidth, PaddleHeight);
   context.stroke();
   context.beginPath();
   context.arc(BallX,BallY,10,0,2*Math.PI, false);
@@ -54,8 +59,8 @@ function DrawGame() {
   context.stroke();
 }
 function MovePieces() {
-  PlayerPaddle += PlayerPaddle_step;
-  ComputerPaddle += ComputerPaddle_step;
+  PlayerPaddleY += PlayerPaddle_step;
+  ComputerPaddleY += ComputerPaddle_step;
   BallX += BallX_step;
   BallY += BallY_step;
   for (var Key in DownKey){
@@ -63,11 +68,11 @@ function MovePieces() {
     var Value = Number(Key);
     // ----------For down arrow
     if (Value == 38) {
-      PlayerPaddle -= 5;
+      PlayerPaddleY -= 5;
     }
     // ----------For up arrow
     else if (Value == 40) {
-      PlayerPaddle += 5;
+      PlayerPaddleY += 5;
     }
     // ----------Press Q to quit
     else if (Value == 81 || Value == 113) {
@@ -76,30 +81,47 @@ function MovePieces() {
     else {}
   }
   //Computer Paddle follows the ball
-  if (BallY - 10 < ComputerPaddle + 25) {
+  if (BallY - 10 < ComputerPaddleY + 25) {
     ComputerPaddle_step = 5;
   }
-  if (BallY + 10 < ComputerPaddle + 25) {
+  if (BallY + 10 < ComputerPaddleY + 25) {
     ComputerPaddle_step = -5;
   }
-  // If Ball hit side of ComputerPaddle, Ball will bounce
-   if (BallY-10 < ComputerPaddle+50 && BallY-10 > ComputerPaddle-50 && BallX-10 < ComputerPaddle+25) {
-     BallX = 800 - 8;
-     BallX =-1*BallX_step;
-   }
+  // If Ball hit side of ComputerPaddleY, Ball will bounce
+  if (BallX > 300) {
+    if (BallY-5 < (ComputerPaddleY+PaddleHeight) &&
+        BallY+5 > ComputerPaddleY &&
+        BallX-5 <  (ComputerPaddleX+PaddleWidth) &&
+        BallX+5 > ComputerPaddleX) {
+      BallX_step = -3;
+      BallX += BallX_step;
+    }
+  }
+  if (BallX < 300) {
+    console.log("power level under 300")
+    if (BallY-5 < (PlayerPaddleY+PaddleHeight) &&
+        BallY+5 > PlayerPaddleY &&
+        BallX-5 < (PlayerPaddleX+PaddleWidth) &&
+        BallX+5 > PlayerPaddleX) {
+      console.log("should hit");
+      BallX_step = 3;
+      BallX += BallX_step;
+    }
+  }
+
 }
 function ManagePieces() {
-  if (PlayerPaddle+50>500) {
-    PlayerPaddle = 500 - 50;
+  if (PlayerPaddleY+50>500) {
+    PlayerPaddleY = 500 - 50;
   }
-  if (PlayerPaddle<0) {
-    PlayerPaddle = 0;
+  if (PlayerPaddleY<0) {
+    PlayerPaddleY = 0;
   }
-  if (ComputerPaddle+50>500) {
-    ComputerPaddle = 500 - 50;
+  if (ComputerPaddleY+50>500) {
+    ComputerPaddleY = 500 - 50;
   }
-  if (ComputerPaddle<0) {
-    ComputerPaddle = 0;
+  if (ComputerPaddleY<0) {
+    ComputerPaddleY = 0;
   }
   if (BallY + 10 + BallY_step > 500) {
     BallY = 500 - 10;
