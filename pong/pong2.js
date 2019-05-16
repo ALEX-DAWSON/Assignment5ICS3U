@@ -1,6 +1,10 @@
 /* -------------------------------------------------
 Author: Alex Dawson
 Description: Pong game
+-------------------------------------------------
+For Carrier: PlayerPaddle = LeftPaddley, ComputerPaddle = RightPaddley, BallY = Circley,
+BallX = Circlex, PlayerPaddle_step = LeftPaddleStep, ComputerPaddle_step = RightPaddleStep,
+ BallX_step = XBallStep, BallY_step = YBallStep, DownKey = keysDown.
 -------------------------------------------------- */
 // --------------------------------------------------Canvas setup
  var canvas = document.createElement('canvas');
@@ -71,9 +75,18 @@ function MovePieces() {
     }
     else {}
   }
+  //Computer Paddle follows the ball
   if (BallY - 10 < ComputerPaddle + 25) {
     ComputerPaddle_step = 5;
   }
+  if (BallY + 10 < ComputerPaddle + 25) {
+    ComputerPaddle_step = -5;
+  }
+  // If Ball hit side of ComputerPaddle, Ball will bounce
+   if (BallY-10 < ComputerPaddle+50 && BallY-10 > ComputerPaddle-50 && BallX-10 < ComputerPaddle+25) {
+     BallX = 800 - 8;
+     BallX =-1*BallX_step;
+   }
 }
 function ManagePieces() {
   if (PlayerPaddle+50>500) {
@@ -96,9 +109,6 @@ function ManagePieces() {
     BallY = 10;
     BallY_step =-1*BallY_step;
   }
-  // if (BallY > ComputerPaddle + 50 && ComputerPaddle < BallX + 10 && BallX + 10 > 792 && BallX + 10 < 800) {
-  //   BallX += 10;
-  // }
 }
 // --------------------------------------------------
 
