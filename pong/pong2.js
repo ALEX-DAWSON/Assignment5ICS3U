@@ -28,8 +28,8 @@ var BallY = 250;
 // ----------Sprite Movement
 var PlayerPaddle_step = 0;
 var ComputerPaddle_step = 0;
-var BallX_step = 5;
-var BallY_step = -5;
+var BallX_step = Math.floor(Math.random()*10); //Generates a random number between 0 and 9 and has the ball go in that direction
+var BallY_step = Math.floor(Math.random()*-10);
 var DownKey = {};
 window.addEventListener("keydown", function(event) {DownKey[event.keyCode] = true;});
 window.addEventListener("keyup", function(event) {delete DownKey[event.keyCode];});
@@ -103,7 +103,7 @@ function MovePieces() {
         BallY+5 > PlayerPaddleY &&
         BallX-5 < (PlayerPaddleX+PaddleWidth) &&
         BallX+5 > PlayerPaddleX) {
-      console.log("should hit");
+      console.log("HIT!");
       BallX_step = 3;
       BallX += BallX_step;
     }
@@ -131,10 +131,35 @@ function ManagePieces() {
     BallY = 10;
     BallY_step =-1*BallY_step;
   }
+  if (BallX < 0 || BallX > 800) {
+    console.log("Oops. Someone missed.")
+    Reset();
+  }
 }
+function Reset() {
+  PlayerPaddleY = 225;
+  PlayerPaddleX = 0;
+  ComputerPaddleY = 225;
+  ComputerPaddleX = 792;
+  BallX = 400;
+  BallY = 250;
+  PlayerPaddle_step = 0;
+  ComputerPaddle_step = 0;
+  BallX_step = 5;
+  BallY_step = -5;
+}
+
 // --------------------------------------------------
 
 // --------------------------------------------------Animation
+function Play () {
+  if (keepPlaying=true) {
+    MovePieces();
+  }
+  else if (keepPlaying=false) {
+    Reset();
+  }
+}
 
 function DisplayFrames() {
   setInterval (NextFrame , 60);
@@ -143,7 +168,7 @@ function NextFrame () {
   EraseCanvas();
   DrawGame();
   ManagePieces();
-  MovePieces();
+  Play();
 }
 
 // --------------------------------------------------Main Program

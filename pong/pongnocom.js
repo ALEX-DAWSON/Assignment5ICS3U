@@ -3,6 +3,7 @@ Author: Alex Dawson
 Description: Pong game
 -------------------------------------------------
 This will be Pong without comments below this one.
+This is so you can easily copy this into a Virtual Machiene and run on localhost.
 -------------------------------------------------- */
  var canvas = document.createElement('canvas');
  var canvasWidth = 800;
@@ -82,18 +83,17 @@ function MovePieces() {
       BallX += BallX_step;
     }
   }
-  if (BallX < 300) {
+  else if (BallX < 300) {
     console.log("power level under 300")
     if (BallY-5 < (PlayerPaddleY+PaddleHeight) &&
         BallY+5 > PlayerPaddleY &&
         BallX-5 < (PlayerPaddleX+PaddleWidth) &&
         BallX+5 > PlayerPaddleX) {
-      console.log("should hit");
+      console.log("HIT!");
       BallX_step = 3;
       BallX += BallX_step;
     }
   }
-
 }
 function ManagePieces() {
   if (PlayerPaddleY+50>500) {
@@ -116,6 +116,30 @@ function ManagePieces() {
     BallY = 10;
     BallY_step =-1*BallY_step;
   }
+  if (BallX < 0 || BallX > 800) {
+    console.log("Oops. Someone missed.")
+    Reset();
+  }
+}
+function Reset() {
+  PlayerPaddleY = 225;
+  PlayerPaddleX = 0;
+  ComputerPaddleY = 225;
+  ComputerPaddleX = 792;
+  BallX = 400;
+  BallY = 250;
+  PlayerPaddle_step = 0;
+  ComputerPaddle_step = 0;
+  BallX_step = 5;
+  BallY_step = -5;
+}
+function Play () {
+  if (keepPlaying=true) {
+    MovePieces();
+  }
+  else if (keepPlaying=false) {
+    Reset();
+  }
 }
 function DisplayFrames() {
   setInterval (NextFrame , 60);
@@ -124,7 +148,7 @@ function NextFrame () {
   EraseCanvas();
   DrawGame();
   ManagePieces();
-  MovePieces();
+  Play();
 }
 
 DisplayFrames();
