@@ -28,16 +28,28 @@ var BallY = 250;
 // ----------Sprite Movement
 var PlayerPaddle_step = 0;
 var ComputerPaddle_step = 0;
-var BallX_step = Math.floor(Math.random()*10); //Generates a random number between 0 and 9 and has the ball go in that direction
-var BallY_step = Math.floor(Math.random()*-10);
+var BallX_step = 5;
+var BallY_step = 0;
+if (Random >= 5){
+  window.alert("Towards Computer")
+  BallY_step = Math.floor((Math.random()*-10)-1);
+}
+else if (Random < 5){
+  window.alert("Towards Player")
+  BallY_step = Math.floor((Math.random()*10)+1);
+}
 var DownKey = {};
 window.addEventListener("keydown", function(event) {DownKey[event.keyCode] = true;});
 window.addEventListener("keyup", function(event) {delete DownKey[event.keyCode];});
 // ----------Widths and Heights
 var PaddleWidth = 8;
 var PaddleHeight = 50;
+// ----------Scores
+var PlayerScore = 0;
+var ComputerScore = 0;
 // ----------Game Functions
-var keepPlaying = true;
+var Random = Math.floor((Math.random()*10)+1);//Randomly chooses between 1 and 10
+var KeepPlaying = 1;
 function EraseCanvas() {
   var eraseCanvas = document.createElement('canvas');
   eraseCanvas.width = canvasWidth;
@@ -64,19 +76,19 @@ function MovePieces() {
   BallX += BallX_step;
   BallY += BallY_step;
   for (var Key in DownKey){
-    // ----------Number(Key) assigns ascii number with key to Value
-    var Value = Number(Key);
+    // ----------Number(Key) assigns ascii number with key to KeyValue
+    var KeyValue = Number(Key);
     // ----------For down arrow
-    if (Value == 38) {
+    if (KeyValue == 38) {
       PlayerPaddleY -= 5;
     }
     // ----------For up arrow
-    else if (Value == 40) {
+    else if (KeyValue == 40) {
       PlayerPaddleY += 5;
     }
     // ----------Press Q to quit
-    else if (Value == 81 || Value == 113) {
-      keepPlaying = false;
+    else if (KeyValue == 81 || KeyValue == 113) {
+      KeepPlaying=0;
     }
     else {}
   }
@@ -88,17 +100,19 @@ function MovePieces() {
     ComputerPaddle_step = -5;
   }
   // If Ball hit side of ComputerPaddleY, Ball will bounce
-  if (BallX > 300) {
+  if (BallX > 400) {
+    console.log("power level over 400");
     if (BallY-5 < (ComputerPaddleY+PaddleHeight) &&
         BallY+5 > ComputerPaddleY &&
         BallX-5 <  (ComputerPaddleX+PaddleWidth) &&
         BallX+5 > ComputerPaddleX) {
+      console.log("HIT!");
       BallX_step = -3;
       BallX += BallX_step;
     }
   }
-  else if (BallX < 300) {
-    console.log("power level under 300")
+  else if (BallX < 400) {
+    console.log("power level under 400")
     if (BallY-5 < (PlayerPaddleY+PaddleHeight) &&
         BallY+5 > PlayerPaddleY &&
         BallX-5 < (PlayerPaddleX+PaddleWidth) &&
@@ -131,8 +145,17 @@ function ManagePieces() {
     BallY = 10;
     BallY_step =-1*BallY_step;
   }
-  if (BallX < 0 || BallX > 800) {
-    console.log("Oops. Someone missed.")
+  // ----------Scoring System
+  if (BallX > 800) {
+    PlayerScore++;
+    //window.alert("Score. Player = "+PlayerScore);
+    console.log("Oops. Computer missed.")
+    Reset();
+  }
+  else if (BallX < 0) {
+    ComputerScore++;
+    //window.alert("Score. Computer = "+ComputerScore);
+    console.log("Oops. You missed.")
     Reset();
   }
 }
@@ -145,28 +168,44 @@ function Reset() {
   BallY = 250;
   PlayerPaddle_step = 0;
   ComputerPaddle_step = 0;
+  Random = Math.floor((Math.random()*10)+1);
   BallX_step = 5;
-  BallY_step = -5;
+  if (Random >= 5){
+    BallY_step = Math.floor((Math.random()*-10)-1);
+  }
+  else if (Random < 5){
+    BallY_step = Math.floor((Math.random()*10)+1);
+  }
+}
+function DrawScore() {
+    context.font = "16px Arial";
+    context.fillStyle = "green";
+    context.fillText("Player: "+PlayerScore, 15, 20);
+    context.fillText("Computer: "+ComputerScore,690,20);
+    context.fillText("Random = "+Random, 400, 20)
 }
 
 // --------------------------------------------------
 
 // --------------------------------------------------Animation
 function Play () {
-  if (keepPlaying=true) {
+  if (KeepPlaying=1) {
     MovePieces();
   }
-  else if (keepPlaying=false) {
+  else if (KeepPlaying=0) {
     Reset();
   }
 }
 
 function DisplayFrames() {
-  setInterval (NextFrame , 60);
+//  if (KeyValue == 81 || KeyValue == 113){
+    setInterval (NextFrame , 60);
+//  }
 }
 function NextFrame () {
   EraseCanvas();
   DrawGame();
+  DrawScore();
   ManagePieces();
   Play();
 }
