@@ -9,7 +9,7 @@
  context.beginPath();
  context.fillStyle="#b7b300";
  context.fillRect(0,0,800,500);
- context.stroke(2);
+ context.stroke();
  context.beginPath();
  context.fillStyle="black";
  context.fillRect(5,5,795-5,495-5);
