@@ -53,7 +53,7 @@ var PaddleHeight = 50;
 // ----------Scores
 var PlayerScore = 0;
 var ComputerScore = 0;
-// ----------Game Functions
+// --------------------------------------------------Game Functions
 var KeepPlaying = 1;
 function EraseCanvas() {
   var eraseCanvas = document.createElement('canvas');
@@ -165,7 +165,7 @@ function ManagePieces() {
     Reset();
   }
 }
-function DrawScore() {
+function DisplayScore() {
     context.font = "16px Arial";
     context.fillStyle = "green";
     context.fillText("Player: "+PlayerScore, 15, 20);
@@ -196,10 +196,13 @@ function Reset() {
     BallY_step = Math.floor((Math.random()*10)+1);
   }
 }
+function Stop() {
+ EraseCanvas();
+}
 // --------------------------------------------------
 
 // --------------------------------------------------Animation
-function Play () {
+function Play() {
   if (KeepPlaying=1) {
     MovePieces();
   }
@@ -214,7 +217,7 @@ function DisplayFrames() {
 function NextFrame () {
   EraseCanvas();
   DrawGame();
-  DrawScore();
+  DisplayScore();
   ManagePieces();
   Play();
 }
