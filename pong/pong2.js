@@ -28,15 +28,21 @@ var BallY = 250;
 // ----------Sprite Movement
 var PlayerPaddle_step = 0;
 var ComputerPaddle_step = 0;
-var BallX_step = 5;
-var BallY_step = 0;
-if (Random >= 5){
-  window.alert("Towards Computer")
+var BallX_step;
+var BallY_step;
+var RandomY = Math.floor((Math.random()*10)+1);//Randomly chooses between 1 and 10
+var RandomX = Math.floor((Math.random()*10)+1)
+if (RandomY >= 5){
   BallY_step = Math.floor((Math.random()*-10)-1);
 }
-else if (Random < 5){
-  window.alert("Towards Player")
+else if (RandomY < 5){
   BallY_step = Math.floor((Math.random()*10)+1);
+}
+if (RandomX >= 5){
+  BallX_step = 5;
+}
+else if (RandomX < 5){
+  BallX_step = -5;
 }
 var DownKey = {};
 window.addEventListener("keydown", function(event) {DownKey[event.keyCode] = true;});
@@ -48,7 +54,6 @@ var PaddleHeight = 50;
 var PlayerScore = 0;
 var ComputerScore = 0;
 // ----------Game Functions
-var Random = Math.floor((Math.random()*10)+1);//Randomly chooses between 1 and 10
 var KeepPlaying = 1;
 function EraseCanvas() {
   var eraseCanvas = document.createElement('canvas');
@@ -86,9 +91,10 @@ function MovePieces() {
     else if (KeyValue == 40) {
       PlayerPaddleY += 5;
     }
-    // ----------Press Q to quit
+    // ----------Press Q to reset
     else if (KeyValue == 81 || KeyValue == 113) {
-      KeepPlaying=0;
+      console.log("Reset")
+      Reset();
     }
     else {}
   }
@@ -148,17 +154,26 @@ function ManagePieces() {
   // ----------Scoring System
   if (BallX > 800) {
     PlayerScore++;
-    //window.alert("Score. Player = "+PlayerScore);
     console.log("Oops. Computer missed.")
+    console.log("Player = "+PlayerScore)
     Reset();
   }
   else if (BallX < 0) {
     ComputerScore++;
-    //window.alert("Score. Computer = "+ComputerScore);
     console.log("Oops. You missed.")
+    console.log("Computer = "+ComputerScore)
     Reset();
   }
 }
+function DrawScore() {
+    context.font = "16px Arial";
+    context.fillStyle = "green";
+    context.fillText("Player: "+PlayerScore, 15, 20);
+    context.fillText("Computer: "+ComputerScore,690,20);
+    context.fillText("RandomY = "+RandomY, 350, 20)
+    context.fillText("RandomX = "+RandomX, 350, 40)
+}
+// ----------Reset
 function Reset() {
   PlayerPaddleY = 225;
   PlayerPaddleX = 0;
@@ -168,23 +183,21 @@ function Reset() {
   BallY = 250;
   PlayerPaddle_step = 0;
   ComputerPaddle_step = 0;
-  Random = Math.floor((Math.random()*10)+1);
-  BallX_step = 5;
-  if (Random >= 5){
+  RandomY = Math.floor((Math.random()*10)+1);
+  RandomX = Math.floor((Math.random()*10)+1)
+  if (RandomX >= 5){
+    BallX_step = 5;
+  }
+  else if (RandomX < 5){
+    BallX_step = -5;
+  }
+  if (RandomY >= 5){
     BallY_step = Math.floor((Math.random()*-10)-1);
   }
-  else if (Random < 5){
+  else if (RandomY < 5){
     BallY_step = Math.floor((Math.random()*10)+1);
   }
 }
-function DrawScore() {
-    context.font = "16px Arial";
-    context.fillStyle = "green";
-    context.fillText("Player: "+PlayerScore, 15, 20);
-    context.fillText("Computer: "+ComputerScore,690,20);
-    context.fillText("Random = "+Random, 400, 20)
-}
-
 // --------------------------------------------------
 
 // --------------------------------------------------Animation
@@ -198,9 +211,7 @@ function Play () {
 }
 
 function DisplayFrames() {
-//  if (KeyValue == 81 || KeyValue == 113){
     setInterval (NextFrame , 60);
-//  }
 }
 function NextFrame () {
   EraseCanvas();
