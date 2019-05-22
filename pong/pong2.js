@@ -170,8 +170,6 @@ function DrawScore() {
     context.fillStyle = "green";
     context.fillText("Player: "+PlayerScore, 15, 20);
     context.fillText("Computer: "+ComputerScore,690,20);
-    context.fillText("RandomY = "+RandomY, 350, 20)
-    context.fillText("RandomX = "+RandomX, 350, 40)
 }
 // ----------Reset
 function Reset() {
