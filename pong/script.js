@@ -1,10 +1,6 @@
 /* -------------------------------------------------
 Author: Alex Dawson
 Description: Pong game
--------------------------------------------------
-For Carrier: PlayerPaddleY = LeftPaddley, ComputerPaddleY = RightPaddley, BallY = Circley,
-BallX = Circlex, PlayerPaddle_step = LeftPaddleStep, ComputerPaddle_step = RightPaddleStep,
- BallX_step = XBallStep, BallY_step = YBallStep, DownKey = keysDown.
 -------------------------------------------------- */
 // --------------------------------------------------Canvas setup
  var canvas = document.createElement('canvas');
