@@ -1,2 +1,1 @@
-"# assignment5ics3u" 
-"# assignment5ICS3U" 
+This is my project for ICS3U. I'm making it into my portfolio website.
