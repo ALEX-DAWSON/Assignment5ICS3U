@@ -175,6 +175,9 @@ function ManagePieces() {
       Reset();
     }
   }
+  else if (KeepPlaying = 0) {
+    Stop();
+  }
 }
 function DisplayScore() {
     context.font = "16px Arial";
@@ -232,23 +235,23 @@ function Stop() {
 
 // --------------------------------------------------Animation
 function Play() {
-  if (KeepPlaying=1) {
+    EraseCanvas();
+    DrawGame();
+    DisplayScore();
+    ManagePieces();
     MovePieces();
-  }
-  else if (KeepPlaying=0) {
-    Stop();
-  }
 }
 
 function DisplayFrames() {
     setInterval (NextFrame , 60);
 }
 function NextFrame () {
-  EraseCanvas();
-  DrawGame();
-  DisplayScore();
-  ManagePieces();
-  Play();
+  if (KeepPlaying = 1){
+    Play();
+  }
+  else if (KeepPlaying = 0) {
+    Stop();
+  }
 }
 
 // --------------------------------------------------Main Program

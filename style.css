@@ -1,90 +1,56 @@
-/* Globals */
-
 body {
-  background-color: #b7b2b2;
-  background-image: linear-gradient(#721111,#368e11); */
-  background-repeat: no-repeat;
-  background-size: auto;
-  margin: 0%;
+  background-color: #fffc82;
+  display: flex;
 }
-* {
-  box-sizing: border-box;
-}
-
 h1 {
-  font-family: sans-serif;
   color: black;
+  font-family: Arial;
   text-align: center;
-  background: linear-gradient(#ff9400,#0043ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+  margin-bottom: 10px;
+  margin-top: 10px;
 
-h2 {
-  font-family: sans-serif;
-  color: black;
-  text-align: center;
-  background: linear-gradient(black, gray);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
-
-h3 {
-  font-family: sans-serif;
-  color: gray;
-  font-style: italic;
-  font-size: 1rem;
-}
-
 p {
-  font-family: sans-serif;
-  color: white;
+  color: #353535;
+  font-family: Arial;
+  font-style: italic;
+  font-weight: bold;
 }
-
-a {
-  font-family: sans-serif;
-  color: #444444;
-}
-
-li {
-  font-family: sans-serif;
-}
-
-/* Classes */
 
 .title {
   display: flex;
   flex: wrap;
   flex-direction: row;
   justify-content: center;
-  /* background-color: #ffffff; */
+  background-color: #ffffff;
   width: 90%;
   margin: auto;
   padding: 5px;
   align-content: center;
 }
 
-.logo {
-  height: 100px;
-  width: auto;
-  border: solid 0px black;
-  border-radius: 100%;
-  margin-right: 2rem;
-}
-
 .wrapper {
   display: flex;
   flex: wrap;
   flex-direction: row;
-  width:1024px;
+  width:90%;
   height: 100%;
   align-content: center;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   background-color:#ffffff;
-  align: center;
 }
 
- /* Content Columns */
+.byline {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.image {
+  border: 2px solid black;
+  border-radius: 100%;
+}
 
 .column2 {
   width: 75%;
@@ -103,7 +69,7 @@ li {
   /*flex-direction: column;*/
 }
 
- /* .row:after { */
- /* display: table; */
- /* clear: both; */
-/* } */
+/* .main {
+  align-self: center;
+  justify-content: center;
+} */
