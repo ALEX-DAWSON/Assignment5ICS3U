@@ -55,6 +55,7 @@ var PlayerScore = 0;
 var ComputerScore = 0;
 // --------------------------------------------------Game Functions
 var KeepPlaying = 1;
+//var Interval = setInterval(EraseCanvas, 10)
 function EraseCanvas() {
   var eraseCanvas = document.createElement('canvas');
   eraseCanvas.width = canvasWidth;
@@ -93,8 +94,16 @@ function MovePieces() {
     }
     // ----------Press Q to reset
     else if (KeyValue == 81 || KeyValue == 113) {
-      console.log("Reset")
-      Reset();
+      if (KeepPlaying = 1) {
+        console.log("Stop");
+        Stop();
+        KeepPlaying = 0;
+      }
+      else if (KeepPlaying == 0) {
+        console.log("Play");
+        Reset();
+        KeepPlaying = 1;
+      }
     }
     else {}
   }
@@ -131,38 +140,40 @@ function MovePieces() {
 
 }
 function ManagePieces() {
-  if (PlayerPaddleY+50>500) {
-    PlayerPaddleY = 500 - 50;
-  }
-  if (PlayerPaddleY<0) {
-    PlayerPaddleY = 0;
-  }
-  if (ComputerPaddleY+50>500) {
-    ComputerPaddleY = 500 - 50;
-  }
-  if (ComputerPaddleY<0) {
-    ComputerPaddleY = 0;
-  }
-  if (BallY + 10 + BallY_step > 500) {
-    BallY = 500 - 10;
-    BallY_step =-1*BallY_step;
-  }
-  if (BallY - 10 - BallY_step < 0) {
-    BallY = 10;
-    BallY_step =-1*BallY_step;
-  }
-  // ----------Scoring System
-  if (BallX > 800) {
-    PlayerScore++;
-    console.log("Oops. Computer missed.")
-    console.log("Player = "+PlayerScore)
-    Reset();
-  }
-  else if (BallX < 0) {
-    ComputerScore++;
-    console.log("Oops. You missed.")
-    console.log("Computer = "+ComputerScore)
-    Reset();
+  if (KeepPlaying = 1) {
+    if (PlayerPaddleY+50>500) {
+      PlayerPaddleY = 500 - 50;
+    }
+    if (PlayerPaddleY<0) {
+      PlayerPaddleY = 0;
+    }
+    if (ComputerPaddleY+50>500) {
+      ComputerPaddleY = 500 - 50;
+    }
+    if (ComputerPaddleY<0) {
+      ComputerPaddleY = 0;
+    }
+    if (BallY + 10 + BallY_step > 500) {
+      BallY = 500 - 10;
+      BallY_step =-1*BallY_step;
+    }
+    if (BallY - 10 - BallY_step < 0) {
+      BallY = 10;
+      BallY_step =-1*BallY_step;
+    }
+    // ----------Scoring System
+    if (BallX > 800) {
+      PlayerScore++;
+      console.log("Oops. Computer missed.")
+      console.log("Player = "+PlayerScore)
+      Reset();
+    }
+    else if (BallX < 0) {
+      ComputerScore++;
+      console.log("Oops. You missed.")
+      console.log("Computer = "+ComputerScore)
+      Reset();
+    }
   }
 }
 function DisplayScore() {
@@ -170,6 +181,7 @@ function DisplayScore() {
     context.fillStyle = "green";
     context.fillText("Player: "+PlayerScore, 15, 20);
     context.fillText("Computer: "+ComputerScore,690,20);
+    context.fillText("KeepPlaying = "+KeepPlaying,375, 20);
 }
 // ----------Reset
 function Reset() {
@@ -197,7 +209,24 @@ function Reset() {
   }
 }
 function Stop() {
- EraseCanvas();
+  KeepPlaying = 0;
+  PlayerPaddleY = 225;
+  PlayerPaddleX = 0;
+  ComputerPaddleY = 225;
+  ComputerPaddleX = 792;
+  BallX = 400;
+  BallY = 250;
+  PlayerPaddle_step = 0;
+  ComputerPaddle_step = 0;
+  BallX_step = 0;
+  BallY_step = 0;
+  EraseCanvas();
+  // document.location.reload();
+  //clearInterval(Interval);
+  context.font = "16px Arial";
+  context.fillStyle = "green";
+  context.fillText("Game Over",300,250);
+  context.fillText("KeepPlaying = "+KeepPlaying,375, 20);
 }
 // --------------------------------------------------
 
@@ -207,7 +236,7 @@ function Play() {
     MovePieces();
   }
   else if (KeepPlaying=0) {
-    Reset();
+    Stop();
   }
 }
 
