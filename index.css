@@ -1,12 +1,6 @@
 /* Globals */
 
-* {
-  box-sizing: border-box;
-}
-
 body {
-  display: flex;
-  justify-content: center;
   background-color: #fffc82;
   background-repeat: no-repeat;
   background-size: auto;
@@ -19,7 +13,11 @@ canvas {
  border-radius: 1rem;
 }
 /* VVV It may not look like it, but this is important!! VVV */
+* {
+  box-sizing: border-box;
+}
 /* ^^^ Do not delete!!! ^^^ */
+
 
 h1 {
   font-family: sans-serif;
@@ -74,10 +72,8 @@ li {
   align-content: center;
 }
 
-
 .titlebanner {
-  height: 10rem;
-  width: auto;
+  border-radius: 1rem;
 }
 
 .logo {
@@ -127,15 +123,20 @@ li {
   margin-left: auto;
   margin-right: auto;
   background-color:#ffffff;
+  border: solid 2px black;
+  border-radius: 1rem;
 }
 
  /* Content Columns */
 
 .column2 {
+  display: flex;
+  flex-direction: column;
   width: 75%;
   order: 2;
   flex-grow: 2;
   padding: 10px;
+  align-items: center;
 }
 
 .column1 {
@@ -145,26 +146,4 @@ li {
   padding: 10px;
   border: solid 2px black;
   /*flex-direction: column;*/
-}
-
-/* Pacman Css */
-
-.header {
-  width: 775px;
-  background-color: white;
-  padding: 10px;
-  border: 3px solid #b7b300;
-  border-radius: 10px;
-}
-
-.byline {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-}
-
-.image {
-  border: 2px solid black;
-  border-radius: 100%;
-  margin-right: 1rem;
 }

@@ -13,18 +13,16 @@
  context.fillRect(0,0,800,500);
  context.stroke();
  context.beginPath();
- context.fillStyle="black";
+ context.fillStyle="white";
  context.fillRect(5,5,795-5,495-5);
  context.stroke();
 //  --------------------------------------------------Animation Setup
-function DisplayFrames() {
-  setInterval(NextFrame, 60);
-}
 function EraseCanvas() {
+  console.log("Erasing Canvas");
   var eraseCanvas = document.createElement('canvas');
   eraseCanvas.width = canvasWidth;
   eraseCanvas.height = canvasHeight;
-  context.fillStyle = "black";
+  context.fillStyle = "white";
   context.fillRect(0, 0, canvasWidth, canvasHeight)
 }
 var HorizontalLocation=7;
@@ -33,7 +31,7 @@ var VerticalLocation=7;
 function NextFrame() {
   EraseCanvas();
   var img = new Image();
-//--------------------------------------------Leg One
+// --------------------------------------------Leg One
   if (HorizontalLocation<690&& VerticalLocation<6) {
     HorizontalLocation+=2;
     switch (HorizontalLocation*VerticalLocation % 3 + 1) {
@@ -42,7 +40,7 @@ function NextFrame() {
       default:
     };
   }
-//--------------------------------------------Leg Two
+// --------------------------------------------Leg Two
   if (HorizontalLocation>690&& VerticalLocation<390) {
     VerticalLocation+=2;
     switch (HorizontalLocation*VerticalLocation % 3 + 1) {
@@ -51,7 +49,7 @@ function NextFrame() {
       default:
     };
   }
-//--------------------------------------------Leg Three
+// --------------------------------------------Leg Three
   if (VerticalLocation>390&& HorizontalLocation>6) {
     HorizontalLocation-=2;
     switch (HorizontalLocation*VerticalLocation % 3 + 1) {
@@ -60,7 +58,7 @@ function NextFrame() {
       default:
     };
   }
-//--------------------------------------------Leg Four
+// --------------------------------------------Leg Four
   if (HorizontalLocation<9&& VerticalLocation>6) {
     VerticalLocation-=2;
     switch (HorizontalLocation*VerticalLocation % 3 + 1) {
@@ -69,10 +67,14 @@ function NextFrame() {
       default:
     };
   }
-//--------------------------------------------Repeat
+// --------------------------------------------Repeat
   {
     context.drawImage (img, HorizontalLocation, VerticalLocation);
   }
+}
+//  --------------------------------------------------
+function DisplayFrames() {
+  setInterval(NextFrame, 60);
 }
 //  --------------------------------------------------Main Program
 DisplayFrames();

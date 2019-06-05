@@ -69,7 +69,7 @@ function DrawGame() {
   context.arc(BallX,BallY,10,0,2*Math.PI, false);
   context.fill();
   context.lineWidth = 1;
-  context.strokeStyle = "green";
+  context.strokeStyle = "#b7b300";
   context.stroke();
 }
 function MovePieces() {
@@ -177,10 +177,9 @@ function ManagePieces() {
 }
 function DisplayScore() {
     context.font = "16px Arial";
-    context.fillStyle = "green";
+    context.fillStyle = "#b7b300";
     context.fillText("Player: "+PlayerScore, 15, 20);
     context.fillText("Computer: "+ComputerScore,690,20);
-    context.fillText("KeepPlaying = "+KeepPlaying,375, 20);
 }
 // ----------Reset
 function Reset() {
@@ -241,6 +240,7 @@ function Play() {
 function DisplayFrames() {
     setInterval (NextFrame , 60);
 }
+
 function NextFrame () {
   if (KeepPlaying = 1){
     Play();
