@@ -14,5 +14,26 @@ window.onload = function() {
   document.body.appendChild(canvas);
 };
 // ---------------------------------------------------------------------------------------------------Globals
-PlayerX = 0;
-PlayerY = 0;
+var PlayerX = 10;
+var PlayerY = 10;
+var GroundWidth = 800;
+var GroundHeight = 10;
+
+// ---------------------------------------------------------------------------------------------------Game Functions
+function EraseCanvas() {
+  var eraseCanvas = document.createElement('canvas');
+  eraseCanvas.width = canvasWidth;
+  eraseCanvas.height = canvasHeight;
+  context.fillStyle = "white";
+  context.fillRect(0, 0, canvasWidth, canvasHeight)
+}
+
+function NextFrame() {
+  EraseCanvas();
+}
+
+function DisplayFrames() {
+    setInterval (NextFrame , 60);
+}
+// ---------------------------------------------------------------------------------------------------Main Program
+DisplayFrames();
