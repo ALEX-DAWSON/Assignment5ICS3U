@@ -14,12 +14,32 @@ window.onload = function() {
   document.body.appendChild(canvas);
 };
 // ---------------------------------------------------------------------------------------------------Globals
-var PlayerX = 10;
-var PlayerY = 10;
+var PlayerSize = 20;
+var PlayerX = 20;
+var PlayerY = 200;
 var GroundWidth = 800;
-var GroundHeight = 10;
+var GroundHeight = 20;
 
 // ---------------------------------------------------------------------------------------------------Game Functions
+
+function ViewPlayer() {
+  context.beginPath();
+  context.fillStyle = "red";
+  context.fillRect(PlayerX, PlayerY, PlayerSize, PlayerSize);
+  context.stroke();
+};
+
+function ViewGround() {
+  context.beginPath();
+  context.fillStyle = "green";
+  context.fillRect(0, 450, GroundWidth, GroundHeight);
+  context.stroke();
+}
+
+function MovePlayer() {
+  
+}
+
 function EraseCanvas() {
   var eraseCanvas = document.createElement('canvas');
   eraseCanvas.width = canvasWidth;
@@ -30,6 +50,8 @@ function EraseCanvas() {
 
 function NextFrame() {
   EraseCanvas();
+  ViewPlayer();
+  ViewGround();
 }
 
 function DisplayFrames() {
