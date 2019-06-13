@@ -1,6 +1,6 @@
 /* ----------------------------------------------------------------------------------
 Author: Alex Dawson
-Description: Platformer
+Description: Etch-A-Sketch
 ------------------------------------------------------------------------------------*/
 // ---------------------------------------------------------------------------------------------------Canvas
 var canvas = document.createElement('canvas');
@@ -14,16 +14,10 @@ window.onload = function() {
   document.body.appendChild(canvas);
 };
 // ---------------------------------------------------------------------------------------------------Globals
-// ----------Ground
-var GroundWidth = 800;
-var GroundHeight = 20;
-// ----------Platforms
-var PlatformWidth = 100;
-var PlatformHeight = 20;
 // ----------Player
-var PlayerSize = 20;
-var PlayerX = 20;
-var PlayerY = 450-GroundHeight;
+var PlayerSize = 5;
+var PlayerX = 400-PlayerSize;
+var PlayerY = 250-PlayerSize;
 var Player_step = 0;
 var Player_jump = 0;
 
@@ -39,22 +33,6 @@ function ViewPlayer() {
   context.fillRect(PlayerX, PlayerY, PlayerSize, PlayerSize);
   context.stroke();
 };
-
-function ViewGround() {
-  context.beginPath();
-  context.fillStyle = "green";
-  context.fillRect(0, 450, GroundWidth, GroundHeight);
-  context.stroke();
-}
-
-function ViewPlatform() {
-  context.beginPath();
-  context.fillStyle = "#214682";
-  context.fillRect(20, 300, PlatformWidth, PlatformHeight);
-  context.fillRect(150, 250, PlatformWidth, PlatformHeight);
-  context.fillRect(650, 400, PlatformWidth, PlatformHeight);
-  context.stroke();
-}
 
 function MovePlayer() {
   PlayerX += Player_step;
@@ -86,9 +64,8 @@ function MovePlayer() {
   else if (PlayerX < -20) {
     PlayerX = 800;
   }
-  // ----------Player can't go through ground
-  if (PlayerY > 450-GroundHeight) {
-    PlayerY = 450-GroundHeight;
+  else if (PlayerY > 500) {
+    PlayerY = -20;
   }
   else if (PlayerY < -20) {
     PlayerY = 500;
@@ -104,15 +81,13 @@ function EraseCanvas() {
 }
 
 function NextFrame() {
-  EraseCanvas();
-  ViewGround();
-  ViewPlatform();
   ViewPlayer();
   MovePlayer();
 }
 
 function DisplayFrames() {
     setInterval (NextFrame , 60);
+    EraseCanvas();
 }
 // ---------------------------------------------------------------------------------------------------Main Program
 DisplayFrames();
