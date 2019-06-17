@@ -2,6 +2,8 @@
 Author: Alex Dawson
 Description: Platformer
 ------------------------------------------------------------------------------------*/
+window.addEventListener("keydown", function(event) {DownKey[event.keyCode] = true;});
+window.addEventListener("keyup", function(event) {delete DownKey[event.keyCode];});
 // ---------------------------------------------------------------------------------------------------Canvas
 var canvas = document.createElement('canvas');
 // VV This needs to be read first by the computer so it can make the canvas VV
@@ -11,7 +13,7 @@ canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 var context = canvas.getContext('2d');
 window.onload = function() {
-  document.body.appendChild(canvas);
+  document.getElementById('main').appendChild(canvas);
 };
 // ---------------------------------------------------------------------------------------------------Globals
 // ----------Ground
@@ -25,11 +27,9 @@ var PlayerSize = 20;
 var PlayerX = 20;
 var PlayerY = 450-GroundHeight;
 var Player_step = 0;
-var Player_jump = 0;
+var Player_jump = 5;
 
 var DownKey = {};
-window.addEventListener("keydown", function(event) {DownKey[event.keyCode] = true;});
-window.addEventListener("keyup", function(event) {delete DownKey[event.keyCode];});
 
 // ---------------------------------------------------------------------------------------------------Game Functions
 
@@ -47,12 +47,10 @@ function ViewGround() {
   context.stroke();
 }
 
-function ViewPlatform() {
+function ViewPlatform(x,y) {
   context.beginPath();
   context.fillStyle = "#214682";
-  context.fillRect(20, 300, PlatformWidth, PlatformHeight);
-  context.fillRect(150, 250, PlatformWidth, PlatformHeight);
-  context.fillRect(650, 400, PlatformWidth, PlatformHeight);
+  context.fillRect(x, y, PlatformWidth, PlatformHeight);
   context.stroke();
 }
 
@@ -64,9 +62,9 @@ function MovePlayer() {
     var KeyValue = Number(Key);
     // ----------For down arrow
     if (KeyValue == 38) {
-      PlayerY -= 5;
+      PlayerY -= 15;
     }
-    // ----------For up arrow
+    // ----------For down arrow
     else if (KeyValue == 40) {
       PlayerY += 5;
     }
@@ -88,8 +86,10 @@ function MovePlayer() {
   }
   // ----------Player can't go through ground
   if (PlayerY > 450-GroundHeight) {
+    // Player_jump = 0;
     PlayerY = 450-GroundHeight;
   }
+  // else if (PlayerY)
   else if (PlayerY < -20) {
     PlayerY = 500;
   }
@@ -106,7 +106,9 @@ function EraseCanvas() {
 function NextFrame() {
   EraseCanvas();
   ViewGround();
-  ViewPlatform();
+  ViewPlatform(250,300);
+  ViewPlatform(400,250);
+  ViewPlatform(500, 350)
   ViewPlayer();
   MovePlayer();
 }

@@ -1,6 +1,7 @@
 /* -------------------------------------------------
 Author: Alex Dawson
 Description: Pong game
+Last Modified: May 22, 2019
 -------------------------------------------------- */
 // --------------------------------------------------Canvas setup
  var canvas = document.createElement('canvas');
@@ -11,7 +12,7 @@ Description: Pong game
  canvas.height = canvasHeight;
  var context = canvas.getContext('2d');
  window.onload = function() {
-   document.body.appendChild(canvas);
+     document.getElementById('main').appendChild(canvas);
  };
 // --------------------------------------------------Global Variable Initializations
 // ----------Sprites
