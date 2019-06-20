@@ -12,11 +12,32 @@ The setInterval command works by repeating a function (like next frame) a set am
 A For loop works by repeating a set of commands every time a set of conditions is met.
 
 
-
+// ----------------------------------------Software Lifecycle
 The software lifecycle {
   Planning: true;
   Implementation: true;
   Documentation: true;
   Release: true;
   Maintenance: true;
+}
+
+// ----------------------------------------Computers in Landfills
+The problem with the environment and computers {
+  Computer: Contains hazardous materials;
+  @HazardousMaterials {
+    Lead: true;
+    PCB: true;
+  }
+}
+
+var ElectricWaste = 50 million metric tons;
+
+if (Hazardous Materials = Landfill) {
+  GroundWater = Toxic;
+}
+
+if (Hazardous Materials = Burned) {
+  Air = Poisonous;
+  Ash = Contaminated;
+  Lead = EVERYWHERE;
 }

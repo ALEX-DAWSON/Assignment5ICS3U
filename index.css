@@ -31,7 +31,7 @@ h2 {
   font-family: sans-serif;
   color: black;
   text-align: center;
-  background: linear-gradient(black, gray);
+  background: linear-gradient(#b7b300, #918e02);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
