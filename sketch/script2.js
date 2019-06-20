@@ -70,9 +70,6 @@ function MovePlayer() {
   else if (PlayerY < -20) {
     PlayerY = 500;
   }
-    else if (KeyValue == 81 || KeyValue == 113) {
-      EraseCanvas();
-    }
 }
 
 function EraseCanvas() {

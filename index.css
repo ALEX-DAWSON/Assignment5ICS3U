@@ -51,6 +51,7 @@ p {
 a {
   font-family: sans-serif;
   color: #444444;
+  cursor: default;
 }
 
 li {
@@ -141,4 +142,11 @@ li {
   order: 2;
   margin: 1rem;
   justify-content: center;
+  align-content: center;
+}
+
+.gif {
+  display: flex;
+  border-radius: 2rem;
+  margin: 0px;
 }
