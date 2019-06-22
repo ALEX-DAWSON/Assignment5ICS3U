@@ -25,9 +25,9 @@ var PlatformHeight = 20;
 // ----------Player
 var PlayerSize = 20;
 var PlayerX = 20;
-var PlayerY = 450-GroundHeight;
+var PlayerY = 430;
 var Player_step = 0;
-var Player_jump = 5;
+var Player_jump = 0;
 
 var DownKey = {};
 
@@ -52,6 +52,37 @@ function ViewPlatform(x,y) {
   context.fillStyle = "#214682";
   context.fillRect(x, y, PlatformWidth, PlatformHeight);
   context.stroke();
+  if (
+    (
+      (PlayerX >= x && PlayerY+PlayerSize >= y)
+      ||
+      (PlayerX+PlayerSize >= x && PlayerY+PlayerSize >= y)
+    )
+    &&
+    (
+      (PlayerX+PlayerSize <= x+PlatformWidth && PlayerY+PlayerSize <= y)
+      ||
+      (PlayerX <= x+PlatformWidth && PlayerY+PlayerSize <= y)
+    )
+  ) {
+    console.log("Top");
+  }
+
+  else if (
+    (
+      (PlayerX+PlayerSize >= x && PlayerY >= y+PlatformHeight)
+      ||
+      (PlayerX >= x && PlayerY >= y+PlatformHeight)
+    )
+    &&
+    (
+      (PlayerX+PlayerSize <= x+PlatformWidth && PlayerY <= y+PlatformHeight)
+      ||
+      (PlayerX <= x+PlatformWidth && PlayerY <= y+PlatformHeight)
+    )
+  ) {
+    console.log("Bottom")
+  }
 }
 
 function MovePlayer() {
@@ -62,7 +93,7 @@ function MovePlayer() {
     var KeyValue = Number(Key);
     // ----------For down arrow
     if (KeyValue == 38) {
-      PlayerY -= 15;
+      PlayerY -= 5;
     }
     // ----------For down arrow
     else if (KeyValue == 40) {
@@ -106,9 +137,10 @@ function EraseCanvas() {
 function NextFrame() {
   EraseCanvas();
   ViewGround();
-  ViewPlatform(250,300);
-  ViewPlatform(400,250);
-  ViewPlatform(500, 350)
+  ViewPlatform(100, 400);
+  ViewPlatform(300, 400);
+  ViewPlatform(500,400);
+  ViewPlatform(700, 400);
   ViewPlayer();
   MovePlayer();
 }
