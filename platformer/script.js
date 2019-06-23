@@ -22,6 +22,8 @@ var GroundHeight = 20;
 // ----------Platforms
 var PlatformWidth = 100;
 var PlatformHeight = 20;
+var PlatformTop;
+var PlatformBottom;
 // ----------Player
 var PlayerSize = 20;
 var PlayerX = 20;
@@ -52,6 +54,8 @@ function ViewPlatform(x,y) {
   context.fillStyle = "#214682";
   context.fillRect(x, y, PlatformWidth, PlatformHeight);
   context.stroke();
+  PlatformTop <= x && PlatformTop >= x+PlatformWidth ;
+  // I don't know what I'm doing. Oh god. All the tutorials I've seen all come from people who understand this way better than I do and Oh My God.
   if (
     (
       (PlayerX >= x && PlayerY+PlayerSize >= y)
@@ -66,6 +70,7 @@ function ViewPlatform(x,y) {
     )
   ) {
     console.log("Top");
+    PlayerY = y-PlayerSize;
   }
 
   else if (
