@@ -70,7 +70,7 @@ function ViewPlatform(x,y) {
     )
   ) {
     console.log("Top");
-    PlayerY = y-PlayerSize;
+    PlayerY = y;
   }
 
   else if (
@@ -96,20 +96,20 @@ function MovePlayer() {
   for (var Key in DownKey){
     // ----------Number(Key) assigns ascii number with key to KeyValue
     var KeyValue = Number(Key);
-    // ----------For down arrow
-    if (KeyValue == 38) {
+    // ----------For up arrow
+    if (KeyValue == 87 || KeyValue == 38) {
       PlayerY -= 5;
     }
     // ----------For down arrow
-    else if (KeyValue == 40) {
+    else if (KeyValue == 83 || KeyValue == 40) {
       PlayerY += 5;
     }
     // ----------For right arrow
-    else if (KeyValue == 39) {
+    else if (KeyValue == 68 || KeyValue == 39) {
       PlayerX += 5;
     }
     // ----------For left arrow
-    else if (KeyValue == 37) {
+    else if (KeyValue == 65 || KeyValue == 37) {
       PlayerX -= 5;
     }
   }
