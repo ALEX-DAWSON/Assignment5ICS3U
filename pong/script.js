@@ -70,7 +70,7 @@ function DrawGame() {
   context.arc(BallX,BallY,10,0,2*Math.PI, false);
   context.fill();
   context.lineWidth = 1;
-  context.strokeStyle = "gray";
+  context.strokeStyle = "#b7b300";
   context.stroke();
 }
 function MovePieces() {
@@ -178,7 +178,7 @@ function ManagePieces() {
 }
 function DisplayScore() {
     context.font = "16px Arial";
-    context.fillStyle = "#262626";
+    context.fillStyle = "#b7b300";
     context.fillText("Player: "+PlayerScore, 15, 20);
     context.fillText("Computer: "+ComputerScore,690,20);
 }

@@ -1,9 +1,8 @@
 button {
-  color: white;
-  background-color: #262626;
+  background-color: #ffb10a;
   padding: 1rem;
   margin: 0.5rem;
-  border: 2px solid #262626;
+  border: 2px solid #ffb10a;
   border-radius: 1rem;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.5s;
@@ -11,8 +10,7 @@ button {
 }
 
 button:hover {
-  color: inherit;
   background-color: white;
-  border: 2px solid #262626;
+  border: 2px solid #ffb10a;
   box-shadow: 5px 5px 10px 0px black;
 }
