@@ -29,7 +29,7 @@ var PlayerSize = 20;
 var PlayerX = 20;
 var PlayerY = 430;
 var Player_step = 0;
-var Player_jump = 0;
+var Player_jump = 2;
 
 var DownKey = {};
 
@@ -56,22 +56,10 @@ function ViewPlatform(x,y) {
   context.stroke();
   PlatformTop <= x && PlatformTop >= x+PlatformWidth ;
   // I don't know what I'm doing. Oh god. All the tutorials I've seen all come from people who understand this way better than I do and Oh My God.
-  if (
-    (
-      (PlayerX >= x && PlayerY+PlayerSize >= y)
-      ||
-      (PlayerX+PlayerSize >= x && PlayerY+PlayerSize >= y)
-    )
-    &&
-    (
-      (PlayerX+PlayerSize <= x+PlatformWidth && PlayerY+PlayerSize <= y)
-      ||
-      (PlayerX <= x+PlatformWidth && PlayerY+PlayerSize <= y)
-    )
-  ) {
-    console.log("Top");
-    PlayerY = y;
-  }
+  if ((PlayerX + PlayerSize >= x && PlayerX <= x + PlatformWidth) && (PlayerY + PlayerSize >= y) && (PlayerY + PlayerSize <= y + PlatformHeight)) {
+    console.log("player hit platform floor");
+    PlayerY = y - PlayerSize;
+}
 
   else if (
     (
