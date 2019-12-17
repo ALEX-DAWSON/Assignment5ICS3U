@@ -57,7 +57,7 @@ function ViewPlatform(x,y) {
   PlatformTop <= x && PlatformTop >= x+PlatformWidth ;
   // I don't know what I'm doing. Oh god. All the tutorials I've seen all come from people who understand this way better than I do and Oh My God.
   if ((PlayerX + PlayerSize >= x && PlayerX <= x + PlatformWidth) && (PlayerY + PlayerSize >= y) && (PlayerY + PlayerSize <= y + PlatformHeight)) {
-    console.log("player hit platform floor");
+    console.log("It Fucking Finally Landed!!!!!!!!!!");
     PlayerY = y - PlayerSize;
 }
 
