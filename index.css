@@ -120,6 +120,7 @@ li {
   align-content: center;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: auto;
   background-color:#ffffff;
   border: solid 2px black;
   border-radius: 1rem;
@@ -132,7 +133,6 @@ li {
   flex-direction: row;
   width: 100%;
   order: 1;
-  /* flex-grow: 1; */
   padding: 10px;
   align-items: flex-start;
   justify-content: space-around;
@@ -148,5 +148,7 @@ li {
 .gif {
   display: flex;
   border-radius: 2rem;
-  margin: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
 }
