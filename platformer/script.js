@@ -29,7 +29,7 @@ var PlayerSize = 20;
 var PlayerX = 20;
 var PlayerY = 430;
 var Player_step = 0;
-var Player_jump = 2;
+var Player_fall = 2;
 
 var DownKey = {};
 
@@ -80,25 +80,25 @@ function ViewPlatform(x,y) {
 
 function MovePlayer() {
   PlayerX += Player_step;
-  PlayerY += Player_jump;
+  PlayerY += Player_fall;
   for (var Key in DownKey){
     // ----------Number(Key) assigns ascii number with key to KeyValue
     var KeyValue = Number(Key);
     // ----------For up arrow
     if (KeyValue == 87 || KeyValue == 38) {
-      PlayerY -= 5;
+      Player_fall -= 5;
     }
     // ----------For down arrow
     else if (KeyValue == 83 || KeyValue == 40) {
-      PlayerY += 5;
+      Player_fall += 5;
     }
     // ----------For right arrow
     else if (KeyValue == 68 || KeyValue == 39) {
-      PlayerX += 5;
+      Player_step += 5;
     }
     // ----------For left arrow
     else if (KeyValue == 65 || KeyValue == 37) {
-      PlayerX -= 5;
+      Player_step -= 5;
     }
   }
   // ----------If player goes off sides of screen, they will appear on other side
@@ -110,7 +110,7 @@ function MovePlayer() {
   }
   // ----------Player can't go through ground
   if (PlayerY > 450-GroundHeight) {
-    // Player_jump = 0;
+    // Player_fall = 0;
     PlayerY = 450-GroundHeight;
   }
   // else if (PlayerY)
@@ -134,6 +134,7 @@ function NextFrame() {
   ViewPlatform(300, 400);
   ViewPlatform(500,400);
   ViewPlatform(700, 400);
+  ViewPlatform(600, 350);
   ViewPlayer();
   MovePlayer();
 }
