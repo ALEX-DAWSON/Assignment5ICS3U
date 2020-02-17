@@ -2,5 +2,7 @@
 This is my first attempt at making a website by myself that is using things like JavaScript and multiple branches and all those relatively fancy things :smile:
 ## To Do
 - [x] Make the *player* in platformer be able to actually land on the platforms
-- [x] Make an information displayer that references a bunch of random shit and memes I don't understand
-![Guy pointing to himself](https://i.kym-cdn.com/photos/images/newsfeed/001/217/711/afd.jpg_large)
+- [x] Make an information displayer that references a bunch of random memes I don't understand
+
+## OKAY! MEMES
+![Baby Yoda Surprised Meme](https://i.pinimg.com/originals/c6/64/2f/c6642fac08a78f768fdc08d93394037f.jpg)
